@@ -91,9 +91,9 @@ salesiq-fullstack/
 
 ## Screenshots
 
-> ![Dashboard](image.png)
-> ![Forecast](image-1.png)
->![Python charts](image-2.png)
+> ![Dashboard](screenshots/image.png)
+> ![Forecast](screenshots/image-1.png)
+>![Python charts](screenshots/image-2.png)
 
 ---
 

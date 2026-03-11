@@ -1,0 +1,56 @@
+import { createContext, useContext } from 'react';
+
+export const LIGHT = {
+  bg:        '#f4f5f7',
+  card:      '#ffffff',
+  border:    '#e2e5ea',
+  divider:   '#eceef1',
+  accent:    '#2563eb',
+  accentBg:  '#eff4ff',
+  accentBdr: '#dbeafe',
+  green:     '#16a34a',
+  greenBg:   '#f0fdf4',
+  greenBdr:  '#bbf7d0',
+  amber:     '#b45309',
+  amberBg:   '#fffbeb',
+  red:       '#dc2626',
+  purple:    '#7c3aed',
+  text:      '#111827',
+  sub:       '#374151',
+  muted:     '#6b7280',
+  faint:     '#9ca3af',
+  grid:      '#f0f1f3',
+  tooltip:   '#ffffff',
+  chart:     ['#2563eb','#16a34a','#7c3aed','#b45309','#0891b2','#be185d','#65a30d','#ea580c'],
+  heat:      ['#f0f4ff','#bfdbfe','#60a5fa','#2563eb','#1e3a8a'],
+  shadow:    '0 4px 12px rgba(0,0,0,0.07)',
+};
+
+export const DARK = {
+  bg:        '#0f1117',
+  card:      '#181c27',
+  border:    '#252d3d',
+  divider:   '#1e2535',
+  accent:    '#3b82f6',
+  accentBg:  '#1e2e4a',
+  accentBdr: '#2d4a7a',
+  green:     '#22c55e',
+  greenBg:   '#14291e',
+  greenBdr:  '#166534',
+  amber:     '#f59e0b',
+  amberBg:   '#2a1f0a',
+  red:       '#f87171',
+  purple:    '#a78bfa',
+  text:      '#f1f5f9',
+  sub:       '#cbd5e1',
+  muted:     '#64748b',
+  faint:     '#475569',
+  grid:      '#1e2535',
+  tooltip:   '#1e2535',
+  chart:     ['#3b82f6','#22c55e','#a78bfa','#f59e0b','#06b6d4','#f472b6','#84cc16','#fb923c'],
+  heat:      ['#0f1e3a','#1e3a6e','#1d4ed8','#2563eb','#93c5fd'],
+  shadow:    '0 4px 16px rgba(0,0,0,0.35)',
+};
+
+export const ThemeContext = createContext(LIGHT);
+export const useTheme = () => useContext(ThemeContext);

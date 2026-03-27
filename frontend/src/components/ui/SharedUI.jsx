@@ -3,16 +3,20 @@ import { useTheme } from '../../context/ThemeContext.js';
 export function KPICard({ label, value, sub, color, bg, icon }) {
   const C = useTheme();
   return (
-    <div className="kpi-card" style={{ background:C.card, borderColor:C.border }}>
+    <div className="kpi-card" style={{ 
+      background:C.card, 
+      borderColor:C.border,
+      boxShadow: C.cardGlow !== 'none' ? `${C.shadow}, ${C.cardGlow}` : C.shadow 
+    }}>
       <div className="kpi-card-inner">
         <div>
           <div className="kpi-label" style={{ color:C.muted }}>{label}</div>
           <div className="kpi-value" style={{ color:C.text }}>{value}</div>
           <div className="kpi-sub"   style={{ color:C.muted }}>{sub}</div>
         </div>
-        <div className="kpi-icon" style={{ background:bg }}>{icon}</div>
+        <div className="kpi-icon" style={{ background:bg, color:color }}>{icon}</div>
       </div>
-      <div className="kpi-bar" style={{ background:color }} />
+      <div className="kpi-bar" style={{ background:color, boxShadow: `0 0 10px ${color}40` }} />
     </div>
   );
 }
@@ -20,7 +24,11 @@ export function KPICard({ label, value, sub, color, bg, icon }) {
 export function Section({ title, subtitle, children, span = 1 }) {
   const C = useTheme();
   return (
-    <div className={`section-card${span === 2 ? ' span-2' : ''}`} style={{ background:C.card, borderColor:C.border }}>
+    <div className={`section-card${span === 2 ? ' span-2' : ''}`} style={{ 
+      background:C.card, 
+      borderColor:C.border,
+      boxShadow: C.shadow
+    }}>
       <div className="section-header" style={{ borderBottomColor:C.divider }}>
         <div className="section-title"    style={{ color:C.text }}>{title}</div>
         {subtitle && <div className="section-subtitle" style={{ color:C.muted }}>{subtitle}</div>}

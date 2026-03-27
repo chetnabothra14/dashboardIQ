@@ -6,23 +6,19 @@ import OverviewTab     from './components/tabs/OverviewTab.jsx';
 import HeatmapTab      from './components/tabs/HeatmapTab.jsx';
 import ProductsTab     from './components/tabs/ProductsTab.jsx';
 import ForecastTab     from './components/tabs/ForecastTab.jsx';
-import AIInsightsTab   from './components/tabs/AIInsightsTab.jsx';
 import PythonChartsTab from './components/tabs/PythonChartsTab.jsx';
 import { useFileUpload } from './hooks/useFileUpload.js';
 import { generateSampleData } from './data/sampleData.js';
 import { fmtINR } from './utils/formatters.js';
 import './styles/global.css';
 
-const TABS = ['overview','heatmap','products','forecast','python charts','ai insights'];
+const TABS = ['overview','heatmap','products','forecast','python charts'];
 
 export default function App() {
   const [dark,         setDark]        = useState(false);
   const [activeTab,    setActiveTab]   = useState('overview');
   const [sampleData]   = useState(() => generateSampleData());
   const [backendData,  setBackendData] = useState(null);
-  const [query,        setQuery]       = useState('');
-  const [aiResponse,   setAiResponse]  = useState('');
-  const [aiLoading,    setAiLoading]   = useState(false);
 
   const C          = dark ? DARK : LIGHT;
   const isUploaded = !!backendData;
@@ -45,26 +41,6 @@ export default function App() {
 
   const upload = useFileUpload(useCallback(d => setBackendData(d), []));
 
-  // ── AI chat ──────────────────────────────────────────────────────────────────
-  const askAI = async () => {
-    if (!query.trim()) return;
-    setAiLoading(true); setAiResponse('');
-    try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          system: `You are a sales analytics AI. Dashboard shows INR metrics: Revenue ${fmtINR(data.totalRevenue)}, Profit ${fmtINR(data.totalProfit)}, ${data.totalOrders} orders, ${data.avgMargin}% margin. Monthly: ${JSON.stringify(data.monthlyData?.slice(0,12))}. Products: ${JSON.stringify(data.productData?.slice(0,5))}. Answer in 2-3 sentences using ₹ with L/Cr notation.`,
-          messages: [{ role: 'user', content: query }],
-        }),
-      });
-      const json = await res.json();
-      setAiResponse(json.content?.[0]?.text || 'No response.');
-    } catch { setAiResponse('AI query failed.'); }
-    setAiLoading(false);
-  };
 
   return (
     <ThemeContext.Provider value={C}>
@@ -204,11 +180,7 @@ export default function App() {
           {activeTab==='products'       && <ProductsTab   data={data}/>}
           {activeTab==='forecast'       && <ForecastTab   data={data} isUploaded={isUploaded} serverCharts={backendData?.charts} forecastR2={backendData?.forecastR2} growthSummary={backendData?.growthSummary}/>}
           {activeTab==='python charts'  && <PythonChartsTab serverCharts={backendData?.charts} isUploaded={isUploaded}/>}
-          {activeTab==='ai insights'    && (
-            <AIInsightsTab data={data} isUploaded={isUploaded}
-              query={query} setQuery={setQuery}
-              aiResponse={aiResponse} aiLoading={aiLoading} onAsk={askAI}/>
-          )}
+
         </main>
 
         <footer className="footer" style={{ borderTopColor:C.border, color:C.faint }}>

@@ -1,4 +1,4 @@
-# SalesIQ — AI Sales Analytics Dashboard
+# SalesIQ — Sales Analytics Dashboard
 
 A full stack sales dashboard I built using React on the frontend and Python (FastAPI) on the backend. You can upload your own CSV or Excel file and it automatically generates charts, forecasts, and insights from your data.
 
@@ -11,7 +11,7 @@ A full stack sales dashboard I built using React on the frontend and Python (Fas
 - Predicts future sales trends using scikit-learn (machine learning)
 - Detects unusual spikes or drops in your data automatically
 - Generates additional statistical charts using Matplotlib and Seaborn
-- Ask questions about your data in plain English using the Claude AI integration
+
 - Light and dark mode
 
 ---
